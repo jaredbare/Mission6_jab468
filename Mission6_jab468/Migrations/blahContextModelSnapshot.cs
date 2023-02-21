@@ -21,9 +21,8 @@ namespace Mission6_jab468.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("DirectorFirstName")
                         .IsRequired()
@@ -56,13 +55,15 @@ namespace Mission6_jab468.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Action",
+                            CategoryID = 1,
                             DirectorFirstName = "Johnny",
                             DirectorLastName = "Appleseed",
                             Edited = false,
@@ -73,7 +74,7 @@ namespace Mission6_jab468.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Action",
+                            CategoryID = 2,
                             DirectorFirstName = "Johnny",
                             DirectorLastName = "Appleseed",
                             Edited = false,
@@ -84,7 +85,7 @@ namespace Mission6_jab468.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Action",
+                            CategoryID = 3,
                             DirectorFirstName = "Johnny",
                             DirectorLastName = "Appleseed",
                             Edited = false,
@@ -92,6 +93,71 @@ namespace Mission6_jab468.Migrations
                             Title = "Fast and Furious 3",
                             Year = "1913"
                         });
+                });
+
+            modelBuilder.Entity("Mission6_jab468.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "VHS"
+                        });
+                });
+
+            modelBuilder.Entity("Mission6_jab468.Models.ApplicationResponse", b =>
+                {
+                    b.HasOne("Mission6_jab468.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

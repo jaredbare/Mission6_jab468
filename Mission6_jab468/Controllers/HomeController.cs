@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission6_jab468.Models;
 using System;
@@ -25,6 +26,7 @@ namespace Mission6_jab468.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
+            ViewBag.Categories = daContext.Categories.ToList();
             //return View("MovieForm");
             return View();
         }
@@ -37,7 +39,10 @@ namespace Mission6_jab468.Controllers
         }
         public IActionResult Display()
         {
-            var applications = daContext.Responses.ToList();
+            var applications = daContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
             return View(applications);
         }
     }
