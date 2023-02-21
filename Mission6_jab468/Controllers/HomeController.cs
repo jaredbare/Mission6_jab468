@@ -45,6 +45,9 @@ namespace Mission6_jab468.Controllers
                 .ToList();
             return View(applications);
         }
-
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }
