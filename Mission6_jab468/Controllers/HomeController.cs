@@ -49,5 +49,16 @@ namespace Mission6_jab468.Controllers
         {
             return View();
         }
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Categories = daContext.Categories.ToList();
+            var form = daContext.Responses.Single(x => x.MovieID == id);
+            return View("MovieForm", form);
+        }
+        public IActionResult Delete()
+        {
+            ViewBag.Categories = daContext.Categories.ToList();
+            return View("MovieForm");
+        }
     }
 }
