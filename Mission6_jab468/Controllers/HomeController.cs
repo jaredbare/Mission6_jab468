@@ -33,9 +33,17 @@ namespace Mission6_jab468.Controllers
         [HttpPost]
         public IActionResult MovieForm(ApplicationResponse ar)
         {
-            daContext.Add(ar);
-            daContext.SaveChanges();
-            return View("confirm", ar);
+            if (ModelState.IsValid)
+            {
+                daContext.Add(ar);
+                daContext.SaveChanges();
+                return View("confirm", ar);
+            }
+            else
+            {
+                ViewBag.Categories = daContext.Categories.ToList();
+                return View();
+            }
         }
         public IActionResult Display()
         {
@@ -49,11 +57,19 @@ namespace Mission6_jab468.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             ViewBag.Categories = daContext.Categories.ToList();
             var form = daContext.Responses.Single(x => x.MovieID == id);
             return View("MovieForm", form);
+        }
+        [HttpPost]
+        public IActionResult Edit (ApplicationResponse response)
+        {
+            daContext.Update(response);
+            daContext.SaveChanges();
+            return RedirectToAction("Display");
         }
         public IActionResult Delete()
         {

@@ -18,7 +18,7 @@ namespace Mission6_jab468.Models
 
         [Required]
         public string Title {get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please add a title")]
         public string Year { get; set; }
         [Required]
         public string DirectorFirstName { get; set; }
