@@ -1,0 +1,29 @@
+﻿@{      ViewData["Title"] = "Wait List";
+}
+@model List<ApplicationResponse> 
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Year</td>
+            <td>DirectorFirstName</td>
+            <td>DirectorLastName</td>
+            <td>Rating</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var x in Model)
+            {
+        <tr>
+            <td>@x.Category</td>
+            <td>@x.Title</td>
+            <td>@x.Year</td>
+            <td>@x.DirectorFirstName</td>
+            <td>@x.DirectorLastName</td>
+            <td>@x.Rating</td>
+        </tr>
+            }
+    </tbody>
+</table>

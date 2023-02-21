@@ -11,11 +11,11 @@ namespace Mission6_jab468.Controllers
 {
     public class HomeController : Controller
     {
-        private blahContext _blahContext { get; set; }
+        private blahContext daContext { get; set; }
 
         public HomeController(blahContext someName)
         {
-            _blahContext = someName;
+            daContext = someName;
         }
 
         public IActionResult Index()
@@ -31,9 +31,14 @@ namespace Mission6_jab468.Controllers
         [HttpPost]
         public IActionResult MovieForm(ApplicationResponse ar)
         {
-            _blahContext.Add(ar);
-            _blahContext.SaveChanges();
+            daContext.Add(ar);
+            daContext.SaveChanges();
             return View("confirm", ar);
+        }
+        public IActionResult Display()
+        {
+            var applications = daContext.Responses.ToList();
+            return View(applications);
         }
     }
 }
