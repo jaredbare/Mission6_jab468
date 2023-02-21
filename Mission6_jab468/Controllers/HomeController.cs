@@ -11,12 +11,10 @@ namespace Mission6_jab468.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private blahContext _blahContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, blahContext someName)
+        public HomeController(blahContext someName)
         {
-            _logger = logger;
             _blahContext = someName;
         }
 
@@ -36,16 +34,6 @@ namespace Mission6_jab468.Controllers
             _blahContext.Add(ar);
             _blahContext.SaveChanges();
             return View("confirm", ar);
-        }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
