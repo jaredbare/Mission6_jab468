@@ -58,10 +58,10 @@ namespace Mission6_jab468.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int movieid)
         {
             ViewBag.Categories = daContext.Categories.ToList();
-            var form = daContext.Responses.Single(x => x.MovieID == id);
+            var form = daContext.Responses.Single(x => x.MovieID == movieid);
             return View("MovieForm", form);
         }
         [HttpPost]
@@ -71,10 +71,19 @@ namespace Mission6_jab468.Controllers
             daContext.SaveChanges();
             return RedirectToAction("Display");
         }
-        public IActionResult Delete()
+        [HttpGet]
+        public IActionResult Delete(int movieid)
         {
-            ViewBag.Categories = daContext.Categories.ToList();
-            return View("MovieForm");
+            var form = daContext.Responses.Single(x => x.MovieID == movieid);
+            //ViewBag.Categories = daContext.Categories.ToList();
+            return View(form);
+        }
+        [HttpPost]
+        public IActionResult Delete (ApplicationResponse ar)
+        {
+            daContext.Responses.Remove(ar);
+            daContext.SaveChanges();
+            return RedirectToAction("Display");
         }
     }
 }

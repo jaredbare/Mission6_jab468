@@ -23,8 +23,8 @@
             <td>@x.DirectorFirstName</td>
             <td>@x.DirectorLastName</td>
             <td>@x.Rating</td>
-            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieID">Edit</a></td>
-            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieID">Delete</a></td>
+            <td><a asp-controller="Home" asp-action="Edit" asp-route-movieid="@x.MovieID">Edit</a></td>
+            <td><a asp-controller="Home" asp-action="Delete" asp-route-movieid="@x.MovieID">Delete</a></td>
         </tr>
             }
     </tbody>
